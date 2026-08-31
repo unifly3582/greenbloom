@@ -1,33 +1,87 @@
 @import 'tailwindcss';
 
+/* ---------------------------------------------------------------
+   Self-hosted variable fonts — Indian Type Foundry (Fontshare)
+   Telma  — display serif, wght 300..900, roman only (no true italic)
+   Amulya — text sans,     wght 300..700, roman + italic
+   Licences: public/fonts/Telma-FFL.txt, public/fonts/Amulya-FFL.txt
+   --------------------------------------------------------------- */
+@font-face {
+  font-family: 'Telma';
+  src: url('/fonts/Telma-Variable.woff2') format('woff2'),
+       url('/fonts/Telma-Variable.woff') format('woff');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Amulya';
+  src: url('/fonts/Amulya-Variable.woff2') format('woff2'),
+       url('/fonts/Amulya-Variable.woff') format('woff');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Amulya';
+  src: url('/fonts/Amulya-VariableItalic.woff2') format('woff2'),
+       url('/fonts/Amulya-VariableItalic.woff') format('woff');
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+/* Telma has no italic cut. Rather than let the browser fake-slant a
+   high-contrast serif, the display family's italic slot is filled with
+   Amulya's true italic — so `font-display` + `italic` renders real italic
+   letterforms, including where `italic` is only on a nested span. */
+@font-face {
+  font-family: 'Telma';
+  src: url('/fonts/Amulya-VariableItalic.woff2') format('woff2'),
+       url('/fonts/Amulya-VariableItalic.woff') format('woff');
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
-  /* Warm editorial botanical palette — sand, espresso ink, terracotta, olive */
-  --color-sand-50: #faf7f0;
-  --color-sand-100: #f3eee3;
-  --color-sand-200: #ece4d3;
-  --color-sand-300: #e0d4bc;
-  --color-sand-400: #cdbb99;
+  /* ============================================================
+     Bloom Green — blush & pine palette (homepage mockup)
+     Ground   Blush Pink   #F9E8EC  blush-100   page background
+     Structure/Accent Deep Pine Green ~#26603D  pine-600
+       (nav text, buttons, banners, sale tags, active states)
+     Text     Deep Green Ink        ink-900     headings + body
+     One accent family only — the mockup uses green for every
+     interactive/accent role, pink for every ground. Ramps are
+     OKLCH-stepped (hue + chroma held) so steps read as siblings.
+     Every pairing used in the UI clears WCAG AA.
+     ============================================================ */
 
-  --color-ink-900: #292018;
-  --color-ink-800: #3a2f24;
-  --color-ink-700: #4d4033;
+  /* Blush pink — ground */
+  --color-blush-50: #fdf6f7;   /* cards, category strip */
+  --color-blush-100: #f9e8ec;  /* ANCHOR — page background */
+  --color-blush-150: #f2d8de;  /* alt band; pink accent ON dark green */
+  --color-blush-200: #e5bdc7;  /* deep ground, hairlines */
+  --color-blush-300: #c08f9c;  /* muted text on dark */
+  --color-blush-400: #966b77;  /* faint text on dark */
 
-  --color-terra-400: #d47a4e;
-  --color-terra-500: #c0592f;
-  --color-terra-600: #a84a26;
-  --color-terra-700: #8c3c1e;
+  /* Pine green — structure + accent */
+  --color-pine-200: #d3e2d6;   /* tint on light */
+  --color-pine-300: #a7c5af;   /* green accent on dark */
+  --color-pine-400: #6f9c7d;
+  --color-pine-500: #417a55;   /* hover-light */
+  --color-pine-600: #26603d;   /* ANCHOR — buttons, banners, sale */
+  --color-pine-700: #1d4b2f;   /* headlines, deep band, hover */
+  --color-pine-800: #143521;   /* deepest band, pressed */
 
-  --color-olive-300: #a3a884;
-  --color-olive-400: #878c66;
-  --color-olive-500: #6c7052;
-  --color-olive-600: #555a3e;
-  --color-olive-700: #43482f;
+  /* Deep green ink — text */
+  --color-ink-500: #6d8073;  /* faint meta on light */
+  --color-ink-600: #55685b;  /* small meta on light */
+  --color-ink-700: #3f5245;  /* body / muted on light */
+  --color-ink-800: #2a3c30;  /* secondary headings */
+  --color-ink-900: #1a2b20;  /* headings, body */
 
-  --color-gold-400: #d4ac62;
-  --color-gold-500: #c9973f;
-
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Telma', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Amulya', system-ui, -apple-system, sans-serif;
 }
 
 html {
@@ -36,7 +90,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-sand-100);
+  background: var(--color-blush-100);
   color: var(--color-ink-900);
   -webkit-font-smoothing: antialiased;
 }
